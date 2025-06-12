@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: birthday-test-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: birthday_db_test
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    container_name: birthday-app-test
+    environment:
+      NODE_ENV: test
+      PORT: 3000
+      LOG_LEVEL: error
+      DB_PRIMARY_HOST: postgres
+      DB_PRIMARY_PORT: 5432
+      DB_NAME: birthday_db_test
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_SSL: "false"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+    command: npm test 
