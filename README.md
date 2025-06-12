@@ -23,6 +23,14 @@ The application is deployed on AWS EKS with the following components:
 - **Monitoring**: Prometheus metrics and CloudWatch logs
 - **Disaster Recovery**: Cross-region S3 replication for backups
 
+## System Architecture
+
+![System Diagram](images/diagram.jpg)
+
+## Application Screenshot
+
+![Screenshot](images/Screenshot%202025-06-12%20at%209.35.29%E2%80%AFPM.png)
+
 ## API Endpoints
 
 ### Save/Update Birthday
@@ -286,14 +294,6 @@ kubectl exec -it <pod-name> -n birthday-app -- /bin/sh
 # Check events
 kubectl get events -n birthday-app --sort-by='.lastTimestamp'
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests
-5. Submit a pull request
 
 ## License
 
