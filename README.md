@@ -25,11 +25,11 @@ The application is deployed on AWS EKS with the following components:
 
 ## System Architecture
 
-![System Diagram](images/diagram.jpg)
+![System Diagram](diagram.jpg)
 
-## Application Screenshot
+## Application data flow
 
-![Screenshot](images/Screenshot%202025-06-12%20at%209.35.29%E2%80%AFPM.png)
+![Application Data Flow](application.png)
 
 ## API Endpoints
 
